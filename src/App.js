@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { useContext } from "react";
+import Menu from "./Components/Menu/Menu";
+import NewsGrid from "./Components/NewsGrid/NewsGrid";
+import NewsContextProvider, { NewsContext } from "./Context/NewsContext";
 function App() {
+  const {
+    items,
+    active,
+    setActive,
+    setCategory,
+    setCountry,
+    setActiveCountry,
+    activeCountry,
+  } = useContext(NewsContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <NewsContextProvider>
+      <div className="app">
+        <h1
+          className="title"
+          data-aos="fade-up"
+          data-aos-offset="200"
+          data-aos-delay="50"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          data-aos-mirror="true"
+          data-aos-once="false"
+          // data-aos-anchor-placement="top-center"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+         
+          See The Latest News
+        </h1>
+        <Menu
+          setCountry={setCountry}
+          setActiveCountry={setActiveCountry}
+          activeCountry={activeCountry}
+          active={active}
+          setActive={setActive}
+          setCategory={setCategory}
+        />
+        <NewsGrid items={items} />
+      </div>
+    </NewsContextProvider>
   );
 }
 
